@@ -1,0 +1,19 @@
+<title>Kirjakatalogi</title>
+<form action="/create" method="ADD">
+<h2>Lisää uusi kirja:</h2>
+Kirjan nimi: <input type="text" name="title"><br>
+Kirjailija <input type="text" name="author"><br>
+Ilmestymisvuosi: <input type="text" name="pub_year"><br>
+Kieli: 
+<select name="lang">
+    <option value="fi" selected>suomi
+    <option value="en">englanti
+    <option value="sv">ruotsi
+</select><br>
+Sivumäärä: <input type="text" name="pagenumber"><br>
+Genre: 
+<input type="checkbox" name="genre" value="1">Klassikko
+<input type="checkbox" name="genre" value="2">Kauhu
+<input type="checkbox" name="genre" value="3">Romantiikka<br>
+<input type="submit" value="Lisää">
+</form>
