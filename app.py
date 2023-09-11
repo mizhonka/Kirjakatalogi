@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template
+from flask import redirect, render_template
 
 app=Flask(__name__)
 
@@ -11,6 +11,6 @@ def index():
 def newbook():
     return render_template("newbook.html")
 
-@app.route("/create", methods=["ADD"])
+@app.route("/create", methods=["POST"])
 def create():
     return redirect("/")
