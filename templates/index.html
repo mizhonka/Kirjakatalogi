@@ -4,6 +4,6 @@
 <h2>Kirjat:</h2>
 <ul>
 {%for b in books%}
-<li>{{b.author}}, {{b.title}}
+<li><a href="/book_page/{{b.id}}">{{b.author}}, {{b.title}}</a>
 {%endfor%}
 </ul>

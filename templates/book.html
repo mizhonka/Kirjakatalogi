@@ -1,5 +1,9 @@
-<h2>{{title}}</h2>
-<h3>{{author}}</h3>
-Ilmestymisvuosi: {{pub_year}}<br>
-Kieli: {{lang}}<br>
-Sivumäärä: {{pagenumber}}<br>
+<h2>{{book.title}}</h2>
+<h3>{{book.author}}</h3>
+<b>Ilmestymisvuosi:</b> {{book.pub_year}}<br>
+<b>Kieli:</b> {{book.lang}}<br>
+<b>Sivumäärä:</b> {{book.pagenumber}}<br>
+<b>Genre(t): </b>
+{%for g in genres%}
+{{g[0]}}
+{%endfor%}

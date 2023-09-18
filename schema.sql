@@ -4,6 +4,10 @@ CREATE TABLE Books(
     author TEXT,
     pub_year INTEGER,
     lang TEXT,
-    pagenumber INT,
+    pagenumber INT
+);
+CREATE TABLE Genres(
+    id SERIAL PRIMARY KEY,
+    book_id INTEGER REFERENCES Books,
     genre TEXT
-)
+);
