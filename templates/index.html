@@ -1,3 +1,6 @@
+{%if session.username%}
+Hei, <b>{{session.username}}</b>!<br>
+<a href="/logout">Kirjaudu ulos</a><br>
 <title>Kirjakatalogi</title>
 <h1>Kirjakatalogi</h1>
 <a href="/newbook">Lisää kirja</a>
@@ -7,3 +10,11 @@
 <li><a href="/book_page/{{b.id}}">{{b.author}}, {{b.title}}</a>
 {%endfor%}
 </ul>
+{%else%}
+<a href="/register">Luo uusi käyttäjä</a>
+<form action="/login" method="POST">
+Käyttäjätunnus: <input type="text" name="username"><br>
+Salasana: <input type="password" name="password"><br>
+<input type="submit" value="Kirjaudu">
+</form>
+{%endif%}
