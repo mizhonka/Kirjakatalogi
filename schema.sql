@@ -13,6 +13,6 @@ CREATE TABLE Genres(
 );
 CREATE TABLE Users(
     id SERIAL PRIMARY KEY,
-    username TEXT,
+    username TEXT UNIQUE,
     password TEXT
 );

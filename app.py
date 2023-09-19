@@ -25,14 +25,14 @@ def login():
     result=db.session.execute(sql, {"username":username})
     user=result.fetchone()
     if not user:
-        return render_template("wronglogin.html")
+        return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
     else:
         hash_value=user.password
         if check_password_hash(hash_value, password):           
             session["username"]=username
             return redirect("/")
         else:
-            return render_template("wronglogin.html")
+            return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
 
 @app.route("/register")
 def register():
@@ -41,12 +41,18 @@ def register():
 @app.route("/newuser", methods=["POST"])
 def newuser():
     username=request.form["username"]
+    if len(username)>30:
+        return render_template("error.html", error="Käyttäjänimi on liian pitkä!")
     password=request.form["password"]
     hash_value=generate_password_hash(password)
     sql=text("INSERT INTO Users (username, password) VALUES (:username, :password)")
-    db.session.execute(sql, {"username":username, "password":hash_value})
-    db.session.commit()
-    return redirect("/")
+    try:
+        db.session.execute(sql, {"username":username, "password":hash_value})
+    except:
+        return render_template("error.html", error="Tili tällä käyttäjänimellä on jo olemassa!")
+    else:
+        db.session.commit()
+        return render_template("createduser.html")
 
 @app.route("/logout")
 def logout():
