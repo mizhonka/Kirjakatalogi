@@ -44,6 +44,8 @@ def newuser():
     if len(username)>30:
         return render_template("error.html", error="Käyttäjänimi on liian pitkä!")
     password=request.form["password"]
+    if len(username)<1 or len(password)<1:
+        return render_template("error.html", error="Täytä kaikki kentät!")
     hash_value=generate_password_hash(password)
     sql=text("INSERT INTO Users (username, password) VALUES (:username, :password)")
     try:
@@ -66,10 +68,20 @@ def newbook():
 @app.route("/create", methods=["POST"])
 def create():
     title=request.form["title"]
+    if len(title)>200:
+        return render_template("error.html", error="Kirjan nimi on liian pitkä!")
     author=request.form["author"]
-    pub_year=request.form["pub_year"]
+    if len(author)>200:
+        return render_template("error.html", error="Kirjailijan nimi on liian pitkä!")
+    try:
+        pub_year=int(request.form["pub_year"])
+    except:
+        return render_template("error.html", error="Ilmestymisvuoden on oltava numeroarvo!")
     lang=request.form["lang"]
-    pagenumber=int(request.form["pagenumber"])
+    try:
+        pagenumber=int(request.form["pagenumber"])
+    except:
+        return render_template("error.html", error="Sivumäärän on oltava numeroarvo!")
     genres=request.form.getlist("genre")
     sql=text("INSERT INTO Books (title, author, pub_year, lang, pagenumber) VALUES (:title, :author, :pub_year, :lang, :pagenumber) RETURNING id")
     result=db.session.execute(sql, {"title":title, "author":author, "pub_year":pub_year, "lang":lang, "pagenumber":pagenumber})
