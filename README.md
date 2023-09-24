@@ -25,3 +25,30 @@ Sovelluksen avulla käyttäjät voivat pitää kirjaa lukemistaan kirjoista, arv
   + Kirjan tai kirjailijan nimi ei saa olla liian pitkä, vuoden ja sivumäärän oltava numeroarvoja
 + Käyttäjä näkee lisätyt kirjat listana ja voi klikata niiden sivulle
 + Käyttäjä voi merkitä kirjan luetuksi / poistaa sen luetuista
+
+### Käynnistysohjeet
+1. Kloonaa repositorio ja siirry juurikansioon
+2. Luo .env -tiedosto ja määritä sen sisältö näin:  
+   ```
+   DATABASE_URL=<tietokannan-paikallinen-osoite>  
+   SECRET_KEY=<salainen-avain>
+   ```
+4. Aktivoi virtuaaliympäristö:  
+   ```
+   python3 -m venv venv
+   ```
+   ```
+   source venv/bin/activate
+   ``` 
+6. Asenna riippuvuudet:
+   ```
+   pip install -r ./requirements.txt
+   ```
+8. Määritä tietokannan skeema:
+   ```
+   psql < schema.sql
+   ```
+10. Käynnistä:  
+   ```
+   flask run
+   ```
