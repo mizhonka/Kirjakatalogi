@@ -1,3 +1,4 @@
+<a href="/">Takaisin etusivulle</a>
 <h2>{{book.title}}</h2>
 <h3>{{book.author}}</h3>
 <b>Ilmestymisvuosi:</b> {{book.pub_year}}<br>
@@ -5,5 +6,17 @@
 <b>Sivumäärä:</b> {{book.pagenumber}}<br>
 <b>Genre(t): </b>
 {%for g in genres%}
-{{g[0]}}
-{%endfor%}
+    {{g[0]}}
+{%endfor%}<br>
+{%if isRead%}
+    <p>Olet lukenut tämän kirjan</p>
+    <form action="/mark_unread" method="POST">
+        <input type="submit" value="Poista luetuista">
+        <input type="hidden" name="book_id" value={{book_id}}>
+    </form>
+{%else%}
+    <form action="/mark_read" method="POST">
+        <input type="submit" value="Merkitse luetuksi">
+        <input type="hidden" name="book_id" value={{book_id}}>
+    </form>
+{%endif%}

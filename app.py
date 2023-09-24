@@ -30,6 +30,10 @@ def login():
         hash_value=user.password
         if check_password_hash(hash_value, password):           
             session["username"]=username
+            sql=text("SELECT id FROM Users WHERE username=:username")
+            result=db.session.execute(sql, {"username":username})
+            user_id=result.fetchone()[0]
+            session["user_id"]=user_id
             return redirect("/")
         else:
             return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
@@ -68,18 +72,28 @@ def newbook():
 @app.route("/create", methods=["POST"])
 def create():
     title=request.form["title"]
+    if len(title)<1:
+        return render_template("error.html", error="Täytäthän kaikki pakolliset kentät!")
     if len(title)>200:
         return render_template("error.html", error="Kirjan nimi on liian pitkä!")
     author=request.form["author"]
+    if len(author)<1:
+        return render_template("error.html", error="Täytäthän kaikki pakolliset kentät!")
     if len(author)>200:
         return render_template("error.html", error="Kirjailijan nimi on liian pitkä!")
+    pub_year_str=request.form["pub_year"]
+    if len(pub_year_str)<1:
+        return render_template("error.html", error="Täytäthän kaikki pakolliset kentät!")
     try:
-        pub_year=int(request.form["pub_year"])
+        pub_year=int(pub_year_str)
     except:
         return render_template("error.html", error="Ilmestymisvuoden on oltava numeroarvo!")
     lang=request.form["lang"]
+    pagenumber_str=request.form["pagenumber"]
+    if len(pagenumber_str)<1:
+        return render_template("error.html", error="Täytäthän kaikki pakolliset kentät!")
     try:
-        pagenumber=int(request.form["pagenumber"])
+        pagenumber=int(pagenumber_str)
     except:
         return render_template("error.html", error="Sivumäärän on oltava numeroarvo!")
     genres=request.form.getlist("genre")
@@ -94,10 +108,33 @@ def create():
 
 @app.route("/book_page/<int:id>")
 def book_page(id):
-    sql=text("SELECT title, author, pub_year, lang, pagenumber, genre FROM Books WHERE id=:id")
+    sql=text("SELECT title, author, pub_year, lang, pagenumber FROM Books WHERE id=:id")
     result=db.session.execute(sql, {"id":id})
     book=result.fetchone()
     sql=text("SELECT genre FROM Genres WHERE book_id=:id")
     result=db.session.execute(sql, {"id":id})
     genres=result.fetchall()
-    return render_template("book.html", book=book, genres=genres)
+    sql=text("SELECT id FROM Read WHERE book_id=:id AND user_id=:user_id")
+    result=db.session.execute(sql, {"id":id, "user_id":session["user_id"]}).fetchone()
+    isRead=False
+    if result:
+        isRead=True
+    return render_template("book.html", book=book, genres=genres, book_id=id, isRead=isRead)
+
+@app.route("/mark_read", methods=["POST"])
+def mark_read():
+    book_id=request.form["book_id"]
+    sql=text("INSERT INTO Read (book_id, user_id) VALUES (:book_id, :user_id)")
+    db.session.execute(sql, {"book_id":book_id, "user_id":session["user_id"]})
+    db.session.commit()
+    route="/book_page/"+str(book_id)
+    return redirect(route)
+
+@app.route("/mark_unread", methods=["POST"])
+def mark_unread():
+    book_id=request.form["book_id"]
+    sql=text("DELETE FROM Read WHERE book_id=:book_id AND user_id=:user_id")
+    db.session.execute(sql, {"book_id":book_id, "user_id":session["user_id"]})
+    db.session.commit()
+    route="/book_page/"+str(book_id)
+    return redirect(route)
