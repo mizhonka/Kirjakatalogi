@@ -24,3 +24,4 @@ Sovelluksen avulla käyttäjät voivat pitää kirjaa lukemistaan kirjoista, arv
 + Käyttäjä voi lisätä uuden kirjan (admin-roolia ei eritelty)
   + Kirjan tai kirjailijan nimi ei saa olla liian pitkä, vuoden ja sivumäärän oltava numeroarvoja
 + Käyttäjä näkee lisätyt kirjat listana ja voi klikata niiden sivulle
++ Käyttäjä voi merkitä kirjan luetuksi / poistaa sen luetuista
