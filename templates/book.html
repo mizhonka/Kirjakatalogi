@@ -8,7 +8,7 @@
 {%for g in genres%}
     {{g[0]}}
 {%endfor%}<br>
-{%if isRead%}
+{%if is_read%}
     <p>Olet lukenut tämän kirjan</p>
     <form action="/mark_unread" method="POST">
         <input type="submit" value="Poista luetuista">

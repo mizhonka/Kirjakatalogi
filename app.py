@@ -1,8 +1,8 @@
+from os import getenv
 from flask import Flask
 from flask import redirect, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text
-from os import getenv
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app=Flask(__name__)
@@ -26,17 +26,15 @@ def login():
     user=result.fetchone()
     if not user:
         return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
-    else:
-        hash_value=user.password
-        if check_password_hash(hash_value, password):           
-            session["username"]=username
-            sql=text("SELECT id FROM Users WHERE username=:username")
-            result=db.session.execute(sql, {"username":username})
-            user_id=result.fetchone()[0]
-            session["user_id"]=user_id
-            return redirect("/")
-        else:
-            return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
+    hash_value=user.password
+    if check_password_hash(hash_value, password):
+        session["username"]=username
+        sql=text("SELECT id FROM Users WHERE username=:username")
+        result=db.session.execute(sql, {"username":username})
+        user_id=result.fetchone()[0]
+        session["user_id"]=user_id
+        return redirect("/")
+    return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
 
 @app.route("/register")
 def register():
@@ -56,9 +54,8 @@ def newuser():
         db.session.execute(sql, {"username":username, "password":hash_value})
     except:
         return render_template("error.html", error="Tili tällä käyttäjänimellä on jo olemassa!")
-    else:
-        db.session.commit()
-        return render_template("createduser.html")
+    db.session.commit()
+    return render_template("createduser.html")
 
 @app.route("/logout")
 def logout():
@@ -97,7 +94,8 @@ def create():
     except:
         return render_template("error.html", error="Sivumäärän on oltava numeroarvo!")
     genres=request.form.getlist("genre")
-    sql=text("INSERT INTO Books (title, author, pub_year, lang, pagenumber) VALUES (:title, :author, :pub_year, :lang, :pagenumber) RETURNING id")
+    sql=text("INSERT INTO Books (title, author, pub_year, lang, pagenumber)" \
+            "VALUES (:title, :author, :pub_year, :lang, :pagenumber) RETURNING id")
     result=db.session.execute(sql, {"title":title, "author":author, "pub_year":pub_year, "lang":lang, "pagenumber":pagenumber})
     book_id=result.fetchone()[0]
     for genre in genres:
@@ -116,10 +114,10 @@ def book_page(id):
     genres=result.fetchall()
     sql=text("SELECT id FROM Read WHERE book_id=:id AND user_id=:user_id")
     result=db.session.execute(sql, {"id":id, "user_id":session["user_id"]}).fetchone()
-    isRead=False
+    is_read=False
     if result:
-        isRead=True
-    return render_template("book.html", book=book, genres=genres, book_id=id, isRead=isRead)
+        is_read=True
+    return render_template("book.html", book=book, genres=genres, book_id=id, is_read=is_read)
 
 @app.route("/mark_read", methods=["POST"])
 def mark_read():
