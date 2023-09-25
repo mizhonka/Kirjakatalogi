@@ -21,7 +21,7 @@ def index():
 def login():
     username=request.form["username"]
     password=request.form["password"]
-    sql=text("SELECT password FROM Users WHERE username=:username")
+    sql=text("SELECT id, password, is_admin FROM Users WHERE username=:username")
     result=db.session.execute(sql, {"username":username})
     user=result.fetchone()
     if not user:
@@ -29,10 +29,11 @@ def login():
     hash_value=user.password
     if check_password_hash(hash_value, password):
         session["username"]=username
-        sql=text("SELECT id FROM Users WHERE username=:username")
-        result=db.session.execute(sql, {"username":username})
-        user_id=result.fetchone()[0]
-        session["user_id"]=user_id
+        #sql=text("SELECT id FROM Users WHERE username=:username")
+        #result=db.session.execute(sql, {"username":username})
+        #user_id=result.fetchone()[0]
+        session["user_id"]=user.id
+        session["is_admin"]=user.is_admin
         return redirect("/")
     return render_template("error.html", error="Käyttäjätunnus tai salasana on väärin!")
 
@@ -49,9 +50,12 @@ def newuser():
     if len(username)<1 or len(password)<1:
         return render_template("error.html", error="Täytä kaikki kentät!")
     hash_value=generate_password_hash(password)
-    sql=text("INSERT INTO Users (username, password) VALUES (:username, :password)")
+    sql=text("INSERT INTO Users (username, password, is_admin) VALUES (:username, :password, :is_admin)")
+    is_admin=False
+    if username=="admin":
+        is_admin=True
     try:
-        db.session.execute(sql, {"username":username, "password":hash_value})
+        db.session.execute(sql, {"username":username, "password":hash_value, "is_admin":is_admin})
     except:
         return render_template("error.html", error="Tili tällä käyttäjänimellä on jo olemassa!")
     db.session.commit()

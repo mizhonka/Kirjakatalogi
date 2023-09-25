@@ -1,20 +1,25 @@
-<title>Kirjakatalogi</title>
-<form action="/create" method="POST">
-    <h2>Lisää uusi kirja:</h2>
-    * Kirjan nimi: <input type="text" name="title"><br>
-    * Kirjailija <input type="text" name="author"><br>
-    * Ilmestymisvuosi: <input type="text" name="pub_year"><br>
-    * Kieli: 
-    <select name="lang">
-        <option value="suomi" selected>suomi
-        <option value="englanti">englanti
-        <option value="ruotsi">ruotsi
-    </select><br>
-    * Sivumäärä: <input type="text" name="pagenumber"><br>
-    Genre: 
-    <input type="checkbox" name="genre" value="Klassikko">Klassikko
-    <input type="checkbox" name="genre" value="Kauhu">Kauhu
-    <input type="checkbox" name="genre" value="Romantiikka">Romantiikka<br>
-    <input type="submit" value="Lisää">
-</form>
-<p><i>* Pakollinen kenttä</i></p>
+<p><a href="/">Takaisin etusivulle</a></p>
+{%if session.is_admin%}
+    <title>Kirjakatalogi</title>
+    <form action="/create" method="POST">
+        <h2>Lisää uusi kirja:</h2>
+        * Kirjan nimi: <input type="text" name="title"><br>
+        * Kirjailija <input type="text" name="author"><br>
+        * Ilmestymisvuosi: <input type="text" name="pub_year"><br>
+        * Kieli:
+        <select name="lang">
+            <option value="suomi" selected>suomi
+            <option value="englanti">englanti
+            <option value="ruotsi">ruotsi
+        </select><br>
+        * Sivumäärä: <input type="text" name="pagenumber"><br>
+        Genre:
+        <input type="checkbox" name="genre" value="Klassikko">Klassikko
+        <input type="checkbox" name="genre" value="Kauhu">Kauhu
+        <input type="checkbox" name="genre" value="Romantiikka">Romantiikka<br>
+        <input type="submit" value="Lisää">
+    </form>
+    <p><i>* Pakollinen kenttä</i></p>
+{%else%}
+    <p>Sinulla ei ole tarvittavia oikeuksia!</p>
+{%endif%}

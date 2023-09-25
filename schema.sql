@@ -16,7 +16,8 @@ CREATE TABLE Genres(
 CREATE TABLE Users(
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE,
-    password TEXT
+    password TEXT,
+    is_admin BOOLEAN
 );
 
 CREATE TABLE Read(

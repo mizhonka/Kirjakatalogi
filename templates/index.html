@@ -3,7 +3,9 @@
     <a href="/logout">Kirjaudu ulos</a><br>
     <title>Kirjakatalogi</title>
     <h1>Kirjakatalogi</h1>
-    <a href="/newbook">Lisää kirja</a>
+    {%if session.is_admin%}
+        <a href="/newbook">Lisää kirja</a>
+    {%endif%}
     <h2>Kirjat:</h2>
     <ul>
     {%for b in books%}
