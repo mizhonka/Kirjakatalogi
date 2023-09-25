@@ -29,9 +29,6 @@ def login():
     hash_value=user.password
     if check_password_hash(hash_value, password):
         session["username"]=username
-        #sql=text("SELECT id FROM Users WHERE username=:username")
-        #result=db.session.execute(sql, {"username":username})
-        #user_id=result.fetchone()[0]
         session["user_id"]=user.id
         session["is_admin"]=user.is_admin
         return redirect("/")
@@ -64,6 +61,8 @@ def newuser():
 @app.route("/logout")
 def logout():
     del session["username"]
+    del session["is_admin"]
+    del session["user_id"]
     return redirect("/")
 
 @app.route("/newbook")
