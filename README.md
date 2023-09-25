@@ -21,8 +21,8 @@ Sovelluksen avulla käyttäjät voivat pitää kirjaa lukemistaan kirjoista, arv
   + Käyttäjänimi saa olla 1-30 merkkiä pitkä, salasana vähintään 1 merkkiä, eikä samannimisiä käyttäjiä voi luoda
 + Käyttäjä voi kirjautua sisään
   + Käyttäjänimen ja salasanan oltava oikein
-+ Käyttäjä voi lisätä uuden kirjan (admin-roolia ei eritelty)
-  + Kirjan tai kirjailijan nimi ei saa olla liian pitkä, vuoden ja sivumäärän oltava numeroarvoja
++ Admin-käyttäjä voi lisätä kirjan
+  + Kirjan tai kirjailijan nimi ei saa olla liian pitkä, vuoden ja sivumäärän oltava numeroarvoja. Osa kentistä pakollisia.
 + Käyttäjä näkee lisätyt kirjat listana ja voi klikata niiden sivulle
 + Käyttäjä voi merkitä kirjan luetuksi / poistaa sen luetuista
 
@@ -52,3 +52,6 @@ Sovelluksen avulla käyttäjät voivat pitää kirjaa lukemistaan kirjoista, arv
    ```
    flask run
    ```
+
+### Admin-käyttäjän luominen
+Luo käyttäjätili käyttäjätunnuksella *admin*. Kirjautuessasi tälle tilille, saat käyttöösi admin-oikeudet.
