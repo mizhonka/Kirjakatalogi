@@ -1,11 +1,12 @@
+<title>Kirjakatalogi</title>
 {%if session.username%}
     Hei, <b>{{session.username}}</b>!<br>
     <a href="/logout">Kirjaudu ulos</a><br>
-    <title>Kirjakatalogi</title>
     <h1>Kirjakatalogi</h1>
     {%if session.is_admin%}
         <a href="/newbook">Lisää kirja</a>
     {%endif%}
+    <p><a href="/search">Hae kirjoja</a></p>
     <h2>Kirjat:</h2>
     <ul>
     {%for b in books%}
@@ -13,6 +14,7 @@
     {%endfor%}
     </ul>
 {%else%}
+<title>Kirjaudu sisään - Kirjakatalogi</title>
 <a href="/register">Luo uusi käyttäjä</a>
 <form action="/login" method="POST">
     Käyttäjätunnus: <input type="text" name="username"><br>

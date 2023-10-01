@@ -1,0 +1,20 @@
+<title>Kirjakatalogi</title>
+<p><a href="/">Takaisin etusivulle</a></p>
+<h2>Hae kirjoja:</h2>
+<form action="/search_result" method="GET">
+    <p>Hakusana: <input type="text" name="query"></p>
+    <p>
+    Hae kentästä:
+    <select name="target">
+        <option value="all" selected>Kaikki
+        <option value="title">Kirjan nimi
+        <option value="author">Kirjailijan nimi
+    </select>
+    </p>
+    <input type="submit" value="Hae">
+</form>
+<ul>
+{%for r in results%}
+    <li><a href="/book_page/{{r.id}}">{{r.author}}, {{r.title}}</a>
+{%endfor%}
+</ul>

@@ -1,3 +1,4 @@
+<title>Kirjakatalogi</title>
 <p><a href="/">Takaisin etusivulle</a></p>
 {%if session.is_admin%}
     <title>Kirjakatalogi</title>
@@ -14,8 +15,13 @@
         </select><br>
         * Sivumäärä: <input type="text" name="pagenumber"><br>
         Genre:
+        <input type="checkbox" name="genre" value="Lapset">Lapset
+        <input type="checkbox" name="genre" value="Jännitys">Jännitys
+        <input type="checkbox" name="genre" value="Mysteeri">Mysteeri
         <input type="checkbox" name="genre" value="Klassikko">Klassikko
         <input type="checkbox" name="genre" value="Kauhu">Kauhu
+        <input type="checkbox" name="genre" value="Fantasia">Fantasia
+        <input type="checkbox" name="genre" value="Scifi">Scifi
         <input type="checkbox" name="genre" value="Romantiikka">Romantiikka<br>
         <input type="submit" value="Lisää">
     </form>

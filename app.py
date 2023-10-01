@@ -139,3 +139,21 @@ def mark_unread():
     db.session.commit()
     route="/book_page/"+str(book_id)
     return redirect(route)
+
+@app.route("/search")
+def search():
+    return render_template("search.html")
+
+@app.route("/search_result", methods=["GET"])
+def search_result():
+    query=request.args["query"]
+    target=request.args["target"]
+    if target=="title":
+        sql=text("SELECT id, title, author FROM Books WHERE title LIKE :query")
+    elif target=="author":
+        sql=text("SELECT id, title, author FROM Books WHERE author LIKE :query")
+    else:
+        sql=text("SELECT id, title, author FROM Books WHERE title LIKE :query OR author LIKE :query")
+    result=db.session.execute(sql, {"query":"%"+query+"%"})
+    results=result.fetchall()
+    return render_template("search.html", results=results)
