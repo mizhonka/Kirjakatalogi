@@ -3,6 +3,12 @@ from db import db
 from flask import session
 from sqlalchemy.sql import text
 
+def my_books():
+    sql=text("SELECT b.id, b.title, b.author FROM Books b, Read r WHERE r.user_id=:id AND r.book_id=b.id")
+    result=db.session.execute(sql, {"id":session["user_id"]})
+    read_books=result.fetchall()
+    return read_books
+
 def create(title, author, pub_year, lang, pagenumber, genres):
     sql=text("INSERT INTO Books (title, author, pub_year, lang, pagenumber)" \
             "VALUES (:title, :author, :pub_year, :lang, :pagenumber) RETURNING id")

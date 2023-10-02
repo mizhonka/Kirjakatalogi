@@ -5,10 +5,12 @@ import books
 
 @app.route("/")
 def index():
-    #sql=text("SELECT id, title, author FROM Books")
-    #result=db.session.execute(sql)
-    #books=result.fetchall()
     return render_template("index.html")
+
+@app.route("/my_books")
+def my_books():
+    read_books=books.my_books()
+    return render_template("my_books.html", books=read_books)
 
 @app.route("/login", methods=["POST"])
 def login():

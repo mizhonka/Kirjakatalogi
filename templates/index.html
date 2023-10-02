@@ -7,14 +7,7 @@
         <a href="/newbook">Lisää kirja</a>
     {%endif%}
     <p><a href="/search">Hae kirjoja</a></p>
-    <!--
-    <h2>Kirjat:</h2>
-    <ul>
-    {%for b in books%}
-        <li><a href="/book_page/{{b.id}}">{{b.author}}, {{b.title}}</a>
-    {%endfor%}
-    </ul>
-    -->
+    <p><a href="/my_books">Luetut kirjat</a></p>
 {%else%}
 <title>Kirjaudu sisään - Kirjakatalogi</title>
 <a href="/register">Luo uusi käyttäjä</a>

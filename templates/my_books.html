@@ -1,0 +1,16 @@
+<title>Kirjakatalogi</title>
+<p><a href="/">Takaisin etusivulle</a></p>
+{%if session.username%}
+    <h2>Lukemasi kirjat:</h2>
+    <ul>
+    {%if books%}
+        {%for b in books%}
+            <li><a href="/book_page/{{b.id}}">{{b.author}}, {{b.title}}</a>
+        {%endfor%}
+    {%else%}
+        <p>Et ole lukenut vielä yhtään kirjaa</p>
+    {%endif%}
+    </ul>
+{%else%}
+    <p>Sinulla ei ole tarvittavia oikeuksia!</p>
+{%endif%}
