@@ -19,12 +19,13 @@ Sovelluksen avulla käyttäjät voivat pitää kirjaa lukemistaan kirjoista, arv
 ### Tällä hetkellä toimii
 + Henkilö voi luoda uuden käyttäjän
   + Käyttäjänimi saa olla 1-30 merkkiä pitkä, salasana vähintään 1 merkkiä, eikä samannimisiä käyttäjiä voi luoda
-+ Käyttäjä voi kirjautua sisään
++ Käyttäjä voi kirjautua sisään ja ulos
   + Käyttäjänimen ja salasanan oltava oikein
 + Admin-käyttäjä voi lisätä kirjan
   + Kirjan tai kirjailijan nimi ei saa olla liian pitkä, vuoden ja sivumäärän oltava numeroarvoja. Osa kentistä pakollisia.
-+ Käyttäjä näkee lisätyt kirjat listana ja voi klikata niiden sivulle
++ Käyttäjä voi hakea kirjoja kirjan ja kirjailijan nimen perusteella
 + Käyttäjä voi merkitä kirjan luetuksi / poistaa sen luetuista
++ Käyttäjä näkee listan lukemistaan kirjoista
 
 ### Käynnistysohjeet
 1. Kloonaa repositorio ja siirry juurikansioon
