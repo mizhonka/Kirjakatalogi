@@ -3,29 +3,19 @@
 Sovelluksen avulla käyttäjät voivat pitää kirjaa lukemistaan kirjoista, arvostella niitä ja saada tilastoja luetuista kirjoista. Käyttäjät ovat peruskäyttäjiä tai ylläpitäjiä.
 
 ### Sovelluksen suunniteltuja ominaisuuksia
+_Tällä hetkellä toimivat raksitettu_
 + Käyttäjä voi
-  + luoda uuden tunnuksen
-  + kirjautua sisään (ja ulos)
-  + hakea kirjoja esim. nimen ja kirjailijan perusteella
-  + merkitä kirjoja luetuiksi
-  + tarkastella tilastoja lukemistaan kirjoista (kirjojen määrä, yleisimmät genret tms.)
-  + arvostella kirjoja
-  + lukea muitten käyttäjien arvosteluja
-  + tarkastella muitten käyttäjien tilastoja
+  + [X] luoda uuden tunnuksen
+  + [X] kirjautua sisään (ja ulos)
+  + [X] hakea kirjoja esim. nimen ja kirjailijan perusteella
+  + [X] merkitä kirjoja luetuiksi
+  + [ ] tarkastella tilastoja lukemistaan kirjoista (kirjojen määrä, yleisimmät genret tms.)
+  + [X] arvostella kirjoja
+  + [X] lukea muitten käyttäjien arvosteluja
+  + [ ] tarkastella muitten käyttäjien tilastoja
 + Ylläpitäjä voi
-  + Lisätä uusia kirjoja ja niiden tietoja (esim. sivumäärä, genre, kirjailijat)
-  + Poistaa käyttäjien arvosteluja
-
-### Tällä hetkellä toimii
-+ Henkilö voi luoda uuden käyttäjän
-  + Käyttäjänimi saa olla 1-30 merkkiä pitkä, salasana vähintään 1 merkkiä, eikä samannimisiä käyttäjiä voi luoda
-+ Käyttäjä voi kirjautua sisään ja ulos
-  + Käyttäjänimen ja salasanan oltava oikein
-+ Admin-käyttäjä voi lisätä kirjan
-  + Kirjan tai kirjailijan nimi ei saa olla liian pitkä, vuoden ja sivumäärän oltava numeroarvoja. Osa kentistä pakollisia.
-+ Käyttäjä voi hakea kirjoja kirjan ja kirjailijan nimen perusteella
-+ Käyttäjä voi merkitä kirjan luetuksi / poistaa sen luetuista
-+ Käyttäjä näkee listan lukemistaan kirjoista
+  + [X] Lisätä uusia kirjoja ja niiden tietoja (esim. sivumäärä, genre, kirjailijat)
+  + [X] Poistaa käyttäjien arvosteluja
 
 ### Käynnistysohjeet
 1. Kloonaa repositorio ja siirry juurikansioon
