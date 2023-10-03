@@ -2,10 +2,41 @@ from app import app
 from flask import redirect, render_template, request, session
 import users
 import books
+import reviews
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/review", methods=["POST"])
+def review():
+    title=request.form["title"]
+    book_id=request.form["book_id"]
+    r=reviews.get_review(book_id)
+    if r:
+        cur_score=r.score
+        cur_review=r.review
+    else:
+        cur_score=1
+        cur_review=""
+    return render_template("review.html", title=title, book_id=book_id, cur_score=cur_score, cur_review=cur_review)
+
+@app.route("/add_review", methods=["POST"])
+def add_review():
+    score=request.form["score"]
+    review=request.form["review"]
+    book_id=request.form["book_id"]
+    reviews.add_review(score, review, book_id)
+    route="/book_page/"+str(book_id)
+    return redirect(route)
+
+@app.route("/delete_review", methods=["POST"])
+def delete_review():
+    id=request.form["id"]
+    book_id=request.form["book_id"]
+    reviews.delete_review(id)
+    route="/book_page/"+str(book_id)
+    return redirect(route)
 
 @app.route("/my_books")
 def my_books():
@@ -79,7 +110,14 @@ def create():
 @app.route("/book_page/<int:id>")
 def book_page(id):
     info=books.book_page(id)
-    return render_template("book.html", book=info[0], genres=info[1], book_id=id, is_read=info[2])
+    score=reviews.get_average(id)
+    r=reviews.get_reviews(id)
+    if score:
+        score=score[0]
+    my_score=reviews.get_my_score(id)
+    if my_score:
+        my_score=my_score[0]
+    return render_template("book.html", book=info[0], genres=info[1], book_id=id, is_read=info[2], score=score, my_score=my_score, reviews=r)
 
 @app.route("/mark_read", methods=["POST"])
 def mark_read():

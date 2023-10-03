@@ -1,0 +1,24 @@
+<title>Kirjakatalogi - Lisää arvostelu</title>
+<p><a href="/">Takaisin etusivulle</a></p>
+{%if session.username%}
+    <h2>Lisää arvostelu kirjalle '{{title}}':</h2>
+    <form action="/add_review" method="POST">
+        <input type="hidden" name="book_id" value="{{book_id}}">
+        <p>Arvosana:
+        <select name="score">
+            {%for i in range(1, 6)%}
+                {%if i == cur_score%}
+                    <option value={{i}} selected>{{i}}
+                {%else%}
+                    <option value={{i}}>{{i}}
+                {%endif%}
+            {%endfor%}
+        </select>
+        </p>
+        <p>Sanallinen arvio:</p>
+        <p><textarea name="review" rows="3" cols="50">{{cur_review}}</textarea></p>
+        <input type="submit" value="Lähetä">
+    </form>
+{%else%}
+    <p>Sinulla ei ole tarvittavia oikeuksia</p>
+{%endif%}

@@ -25,3 +25,11 @@ CREATE TABLE Read(
     book_id INTEGER REFERENCES Books,
     user_id INTEGER REFERENCES Users
 );
+
+CREATE TABLE Reviews(
+    id SERIAL PRIMARY KEY,
+    book_id INTEGER REFERENCES Books,
+    user_id INTEGER REFERENCES Users,
+    score INTEGER,
+    review TEXT
+);

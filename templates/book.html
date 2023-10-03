@@ -1,23 +1,60 @@
-<title>Kirjakatalogi</title>
+<title>Kirjakatalogi - {{book.title}}</title>
 <a href="/">Takaisin etusivulle</a>
-<h2>{{book.title}}</h2>
-<h3>{{book.author}}</h3>
-<b>Ilmestymisvuosi:</b> {{book.pub_year}}<br>
-<b>Kieli:</b> {{book.lang}}<br>
-<b>Sivumäärä:</b> {{book.pagenumber}}<br>
-<b>Genre(t): </b>
-{%for g in genres%}
-    {{g[0]}}
-{%endfor%}<br>
-{%if is_read%}
-    <p>Olet lukenut tämän kirjan</p>
-    <form action="/mark_unread" method="POST">
-        <input type="submit" value="Poista luetuista">
-        <input type="hidden" name="book_id" value={{book_id}}>
+{%if session.username%}
+    <h2>{{book.title}}</h2>
+    <h3>{{book.author}}</h3>
+    <b>Ilmestymisvuosi:</b> {{book.pub_year}}<br>
+    <b>Kieli:</b> {{book.lang}}<br>
+    <b>Sivumäärä:</b> {{book.pagenumber}}<br>
+    <b>Genre(t): </b>
+    {%for g in genres%}
+        {{g[0]}}
+    {%endfor%}<br>
+    {%if score%}
+        <b>Yleisarvosana: </b>{{score}}<br>
+    {%else%}
+        <b>Yleisarvosana: </b><i>Tällä kirjalla ei ole yhtään arvostelua</i><br>
+    {%endif%}
+    {%if my_score%}
+        <b>Oma arvosana: </b>{{my_score}}<br>
+    {%else%}
+        <b>Oma arvosana: </b><i>Et ole arvostellut tätä kirjaa</i><br>
+    {%endif%}
+    {%if is_read%}
+        <p>Olet lukenut tämän kirjan</p>
+        <form action="/mark_unread" method="POST">
+            <input type="submit" value="Poista luetuista">
+            <input type="hidden" name="book_id" value={{book_id}}>
+        </form>
+    {%else%}
+        <form action="/mark_read" method="POST">
+            <input type="submit" value="Merkitse luetuksi">
+            <input type="hidden" name="book_id" value={{book_id}}>
+        </form>
+    {%endif%}
+    <form action="/review" method="POST">
+        {%if my_score%}
+            <input type="submit" value="Muokkaa arvostelua">
+        {%else%}
+            <input type="submit" value="Lisää arvostelu">
+        {%endif%}
+        <input type="hidden" name="title" value="{{book.title}}">
+        <input type="hidden" name="book_id" value="{{book_id}}">
     </form>
+    <h2>Arvostelut:</h2>
+    {%for r in reviews%}
+        <p><b>{{r.username}}</b></p>
+        <p><b>Arvosana: </b>{{r.score}}</p>
+        <p>{{r.review}}</p>
+        {%if session.is_admin or session.user_id == r.user_id%}
+            <form action="/delete_review" method="POST">
+                <p><input type="submit" value="Poista arvostelu"></p>
+                <input type="hidden" name="id" value="{{r.id}}">
+                <input type="hidden" name="book_id" value="{{book_id}}">
+            </form>
+        {%endif%}
+        <br>
+    {%endfor%}
 {%else%}
-    <form action="/mark_read" method="POST">
-        <input type="submit" value="Merkitse luetuksi">
-        <input type="hidden" name="book_id" value={{book_id}}>
-    </form>
+    <p>Sinulla ei ole tarvittavia oikeuksia</p>
 {%endif%}
