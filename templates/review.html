@@ -17,6 +17,7 @@
         </p>
         <p>Sanallinen arvio:</p>
         <p><textarea name="review" rows="3" cols="50">{{cur_review}}</textarea></p>
+        <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
         <input type="submit" value="Lähetä">
     </form>
 {%else%}

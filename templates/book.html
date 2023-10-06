@@ -51,6 +51,7 @@
                 <p><input type="submit" value="Poista arvostelu"></p>
                 <input type="hidden" name="id" value="{{r.id}}">
                 <input type="hidden" name="book_id" value="{{book_id}}">
+                <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
             </form>
         {%endif%}
         <br>
