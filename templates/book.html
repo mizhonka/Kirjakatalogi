@@ -43,7 +43,7 @@
     </form>
     <h2>Arvostelut:</h2>
     {%for r in reviews%}
-        <p><b>{{r.username}}</b></p>
+        <p><b><a href="/stats/{{r.user_id}}/{{r.username}}">{{r.username}}</a></b></p>
         <p><b>Arvosana: </b>{{r.score}}</p>
         <p>{{r.review}}</p>
         {%if session.is_admin or session.user_id == r.user_id%}
