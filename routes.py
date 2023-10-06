@@ -3,10 +3,18 @@ from flask import redirect, render_template, request, session
 import users
 import books
 import reviews
+import stats
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/stats")
+def show_stats():
+    bs=stats.get_basic_stats()
+    ls=stats.get_lang_stats()
+    gs=stats.get_genre_stats()
+    return render_template("stats.html", bs=bs, ls=ls, gs=gs)
 
 @app.route("/review", methods=["POST"])
 def review():

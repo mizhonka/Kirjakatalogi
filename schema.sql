@@ -9,7 +9,7 @@ CREATE TABLE Books(
 
 CREATE TABLE Genres(
     id SERIAL PRIMARY KEY,
-    book_id INTEGER REFERENCES Books,
+    book_id INTEGER REFERENCES Books(id),
     genre TEXT
 );
 
@@ -22,14 +22,14 @@ CREATE TABLE Users(
 
 CREATE TABLE Read(
     id SERIAL PRIMARY KEY,
-    book_id INTEGER REFERENCES Books,
-    user_id INTEGER REFERENCES Users
+    book_id INTEGER REFERENCES Books(id),
+    user_id INTEGER REFERENCES Users(id)
 );
 
 CREATE TABLE Reviews(
     id SERIAL PRIMARY KEY,
-    book_id INTEGER REFERENCES Books,
-    user_id INTEGER REFERENCES Users,
+    book_id INTEGER REFERENCES Books(id),
+    user_id INTEGER REFERENCES Users(id),
     score INTEGER,
     review TEXT
 );

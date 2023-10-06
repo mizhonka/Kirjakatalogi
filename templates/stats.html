@@ -1,9 +1,21 @@
 <title>Kirjakatalogi - Tilastot</title>
 <p><a href="/">Takaisin etusivulle</a></p>
 {%if session.username%}
-    # kirjojen määrä
-    # genrejen jakauma
-    # kielten jakauma
+    <p><h2>Käyttäjän '{{session.username}}' tilastot:</h2></p>
+    <p>Luettu yhteensä <b>{{bs[0]}}</b> kirjaa ja <b>{{bs[1]}}</b> sivua</p>
+    <p><h3>Kielijakauma:</h3></p>
+    <p>Suomi: {{ls[0][1]}} % ( {{ls[0][0]}} kpl )</p>
+    <p>Englanti: {{ls[1][1]}} % ( {{ls[1][0]}} kpl )</p>
+    <p>Ruotsi: {{ls[2][1]}} % ( {{ls[2][0]}} kpl )</p>
+    <p><h3>Genrejakauma:</h3></p>
+    <p>Lapset: {{gs[0][1]}} % ( {{gs[0][0]}} kpl )</p>
+    <p>Jännitys: {{gs[1][1]}} % ( {{gs[1][0]}} kpl )</p>
+    <p>Mysteeri: {{gs[2][1]}} % ( {{gs[2][0]}} kpl )</p>
+    <p>Klassikko: {{gs[3][1]}} % ( {{gs[3][0]}} kpl )</p>
+    <p>Kauhu: {{gs[4][1]}} % ( {{gs[4][0]}} kpl )</p>
+    <p>Fantasia: {{gs[5][1]}} % ( {{gs[5][0]}} kpl )</p>
+    <p>Scifi: {{gs[6][1]}} % ( {{gs[6][0]}} kpl )</p>
+    <p>Romantiikka: {{gs[7][1]}} % ( {{gs[7][0]}} kpl )</p>
 {%else%}
     <p>Sinulla ei ole tarvittavia oikeuksia</p>
 {%endif%}
