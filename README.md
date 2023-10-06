@@ -9,10 +9,10 @@ _Tällä hetkellä toimivat raksitettu_
   + [X] kirjautua sisään (ja ulos)
   + [X] hakea kirjoja esim. nimen ja kirjailijan perusteella
   + [X] merkitä kirjoja luetuiksi
-  + [ ] tarkastella tilastoja lukemistaan kirjoista (kirjojen määrä, yleisimmät genret tms.)
+  + [X] tarkastella tilastoja lukemistaan kirjoista (kirjojen määrä, yleisimmät genret tms.)
   + [X] arvostella kirjoja
   + [X] lukea muitten käyttäjien arvosteluja
-  + [ ] tarkastella muitten käyttäjien tilastoja
+  + [X] tarkastella muitten käyttäjien tilastoja
 + Ylläpitäjä voi
   + [X] Lisätä uusia kirjoja ja niiden tietoja (esim. sivumäärä, genre, kirjailijat)
   + [X] Poistaa käyttäjien arvosteluja
