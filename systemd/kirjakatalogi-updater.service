@@ -1,0 +1,7 @@
+[Unit]
+Description=update to latest release on origin/main
+
+[Service]
+#Type=forking
+WorkingDirectory=%h/kirjakatalogi
+ExecStart=%h/kirjakatalogi/main.sh update
