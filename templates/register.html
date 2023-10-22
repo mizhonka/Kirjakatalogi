@@ -1,7 +1,17 @@
+<link rel="stylesheet" href="/static/main.css">
+<link rel="icon" type="image/x-icon" href="/static/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<img src="/static/banner.png" alt="Kirjakatalogi">
 <title>Kirjakatalogi - Rekisteröidy</title>
-<a href="/index">Kirjaudu sisään</a>
-<form action="/newuser" method="POST">
-    Käyttäjänimi: <input type="text" name="username"><br>
-    Salasana: <input type="password" name="password"><br>
-    <input type="submit" value="Luo käyttäjä"><br>
-</form>
+<body>
+    <div class="content">
+        <form action="/newuser" method="POST">
+            <label for="username">Käyttäjätunnus:</label>
+            <input type="text" name="username">
+            <label for="password">Salasana:</label>
+            <input type="password" name="password">
+            <input id="register-button" type="submit" value="Luo käyttäjä">
+            <a id="login-link" href="/">Käyttäjätili jo olemassa? Kirjaudu sisään tästä!</a>
+        </form>
+    </div>
+</body>

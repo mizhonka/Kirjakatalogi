@@ -1,16 +1,24 @@
+<link rel="stylesheet" href="/static/main.css">
+<link rel="icon" type="image/x-icon" href="/static/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<img src="/static/banner.png" alt="Kirjakatalogi">
 <title>Kirjakatalogi - Luetut kirjat</title>
-<p><a href="/">Takaisin etusivulle</a></p>
-{%if session.username%}
-    <h2>Lukemasi kirjat:</h2>
-    <ul>
-    {%if books%}
-        {%for b in books%}
-            <li><a href="/book_page/{{b.id}}">{{b.author}}, {{b.title}}</a>
-        {%endfor%}
-    {%else%}
-        <p>Et ole lukenut vielä yhtään kirjaa</p>
-    {%endif%}
-    </ul>
-{%else%}
-    <p>Sinulla ei ole tarvittavia oikeuksia!</p>
-{%endif%}
+<body>
+    <div class="content">
+        <p><a href="/">Takaisin etusivulle</a></p>
+        {%if session.username%}
+            <h2>Lukemasi kirjat:</h2>
+            {%if books%}
+                <ul>
+                {%for b in books%}
+                    <p><li><a href="/book_page/{{b.id}}">{{b.author}}, {{b.title}}</a></p>
+                {%endfor%}
+                </ul>
+            {%else%}
+                <p>Et ole lukenut vielä yhtään kirjaa</p>
+            {%endif%}
+        {%else%}
+            <p>Sinulla ei ole tarvittavia oikeuksia!</p>
+        {%endif%}
+    </div>
+</body>

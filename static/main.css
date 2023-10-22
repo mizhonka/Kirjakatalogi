@@ -1,0 +1,76 @@
+body {
+    background: #aaadc4;
+    margin: auto;
+    max-width: 45em;
+    font-family: "Helvetica", "Arial", sans-serif;
+}
+
+img{
+    width: 45em;
+    padding: 1.5em 0;
+}
+
+
+form{
+    background: #f2f6d0;
+    border-radius: .4em;
+    margin: auto;
+    padding: 1.5em 2em;
+    display: grid;
+    max-width: 25em;
+    grid-template-columns: 8em 15em;
+    grid-row-gap: .5em;
+}
+
+.override{
+    background: #aaadc4;
+    display: inline;
+}
+
+form label, input{
+    margin:auto 0;
+}
+
+form #login-button, #submitbook-button, #search-button, #sendreview-button{
+    grid-column-start: 2;
+    width: 5em;
+}
+
+form #register-link, #login-link{
+    grid-column-start: 2;
+}
+
+form #register-button{
+    grid-column-start: 2;
+    width: 10em;
+}
+
+form #target-menu{
+    width: 10em;
+}
+
+form #lang-menu{
+    width: 8em;
+}
+
+form #score-field{
+    width: 3em;
+}
+
+form #pubyear-field, #pagenumber-field{
+    width: 5em;
+}
+
+.content{
+    background: white;
+    padding: 1.5em 2em;
+    border-radius: .4em;
+}
+
+.block{
+    background: #f2f6d0;
+    border-radius: .4em;
+    margin: auto;
+    padding: 1.5em 2em;
+    max-width: 25em;
+}

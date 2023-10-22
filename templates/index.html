@@ -1,20 +1,28 @@
+<link rel="stylesheet" href="/static/main.css">
+<link rel="icon" type="image/x-icon" href="/static/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<img src="/static/banner.png" alt="Kirjakatalogi">
 <title>Kirjakatalogi</title>
-{%if session.username%}
-    Hei, <b>{{session.username}}</b>!<br>
-    <a href="/logout">Kirjaudu ulos</a><br>
-    <h1>Kirjakatalogi</h1>
-    {%if session.is_admin%}
-        <a href="/newbook">Lisää kirja</a>
-    {%endif%}
-    <p><a href="/search">Hae kirjoja</a></p>
-    <p><a href="/my_books">Luetut kirjat</a></p>
-    <p><a href="/stats/{{session.user_id}}/{{session.username}}">Tilastot</a></p>
-{%else%}
-<title>Kirjaudu sisään - Kirjakatalogi</title>
-<a href="/register">Luo uusi käyttäjä</a>
-<form action="/login" method="POST">
-    Käyttäjätunnus: <input type="text" name="username"><br>
-    Salasana: <input type="password" name="password"><br>
-    <input type="submit" value="Kirjaudu">
-</form>
-{%endif%}
+<body>
+    <div class="content">
+        {%if session.username%}
+            Hei, <b>{{session.username}}</b>! <a href="/logout">Kirjaudu ulos</a><br>
+                {%if session.is_admin%}
+                    <p><a href="/newbook">Lisää kirja</a></p>
+                {%endif%}
+                <p><a href="/search">Hae kirjoja</a></p>
+                <p><a href="/my_books">Luetut kirjat</a></p>
+                <p><a href="/stats/{{session.user_id}}/{{session.username}}">Tilastot</a></p>
+        {%else%}
+            <title>Kirjaudu sisään - Kirjakatalogi</title>
+            <form action="/login" method="POST">
+                <label for="username">Käyttäjätunnus:</label>
+                <input type="text" name="username">
+                <label for="password">Salasana:</label>
+                <input type="password" name="password">
+                <input id="login-button" type="submit" value="Kirjaudu">
+                <a id="register-link" href="/register">Uusi käyttäjä? Rekisteröidy tästä!</a>
+            </form>
+        {%endif%}
+    </div>
+</body>
