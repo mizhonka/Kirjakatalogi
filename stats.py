@@ -31,22 +31,22 @@ def get_lang_stats(id):
     total = get_basic_stats(id)[0]
     sql = text(lang_query("suomi"))
     n_fin = execute_with_id(sql, id)
-    if not n_fin==0:
-        fin_per=round(n_fin/total*100)
+    if not n_fin == 0:
+        fin_per = round(n_fin/total*100)
     else:
-        fin_per=0
+        fin_per = 0
     sql = text(lang_query("englanti"))
     n_eng = execute_with_id(sql, id)
-    if not n_eng==0:
-        eng_per=round(n_eng/total*100)
+    if not n_eng == 0:
+        eng_per = round(n_eng/total*100)
     else:
-        eng_per=0
+        eng_per = 0
     sql = text(lang_query("ruotsi"))
     n_sv = execute_with_id(sql, id)
-    if not n_sv==0:
-        sv_per=round(n_sv/total*100)
+    if not n_sv == 0:
+        sv_per = round(n_sv/total*100)
     else:
-        sv_per=0
+        sv_per = 0
     return [(n_fin, fin_per), (n_eng, eng_per), (n_sv, sv_per)]
 
 
@@ -58,7 +58,7 @@ def get_genre_stats(id):
     for g in genres:
         sql = text(genre_query(g))
         n_genre = execute_with_id(sql, id)
-        if not n_genre==0:
+        if not n_genre == 0:
             n_genres.append((n_genre, round(n_genre/total*100)))
         else:
             n_genres.append((n_genre, 0))
