@@ -18,6 +18,8 @@ _Tällä hetkellä toimivat raksitettu_
   + [X] Poistaa käyttäjien arvosteluja
 
 ### Käynnistysohjeet
+
+(Sovellus pyörii myös palvelimella osoitteessa https://oracle.ttj.hu:49153/)
 1. Kloonaa repositorio ja siirry juurikansioon
 2. Luo .env -tiedosto ja määritä sen sisältö näin:  
    ```
